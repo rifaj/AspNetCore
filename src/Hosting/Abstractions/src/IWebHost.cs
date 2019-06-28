@@ -31,15 +31,13 @@ namespace Microsoft.AspNetCore.Hosting
         /// <summary>
         /// Starts listening on the configured addresses.
         /// </summary>
-        /// <param name="cancellationToken">used to abort program start.</param>
-        /// <returns>A <see cref="Task"/> that completes when the <see cref="IWebHost"/> starts.</returns>
         Task StartAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Attempt to gracefully stop the host.
         /// </summary>
-        /// <param name="cancellationToken">Used to indicate when stop should no longer be graceful.</param>
-        /// <returns>A <see cref="Task"/> that completes when the <see cref="IWebHost"/> stops.</returns>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         Task StopAsync(CancellationToken cancellationToken = default);
     }
 }
