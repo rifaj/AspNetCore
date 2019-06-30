@@ -4,9 +4,9 @@
 # This script is meant for testing source build by imitating some of the input parameters and conditions.
 #
 
- set -euo pipefail
+set -euo pipefail
 
- scriptroot="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+scriptroot="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 reporoot="$(dirname "$(dirname "$scriptroot")")"
 
  # For local development, make a backup copy of this file first
@@ -30,5 +30,5 @@ trap "{
     mv "$reporoot/global.bak.json" "$reporoot/global.json"
 }" EXIT
 
- export DotNetBuildFromSource='true'
+export DotNetBuildFromSource='true'
 "$reporoot/eng/common/build.sh" --restore --build --pack "$@"

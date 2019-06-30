@@ -22,7 +22,7 @@
     <IsAnalyzersProject Condition="$(MSBuildProjectName.EndsWith('.Analyzers'))">true</IsAnalyzersProject>
     <IsShipping Condition="'$(IsSampleProject)' == 'true' or '$(IsTestAssetProject)' == 'true' or '$(IsBenchmarkProject)' == 'true' or '$(IsUnitTestProject)' == 'true'">false</IsShipping>
 
-    <ExcludeFromSourceBuild Condition="'$(IsAnalyzersProject)' == 'true' or '$(IsSpecificationTestProject)' == 'true' or $(IsUnitTestProject)' == 'true' or '$(IsBenchmarkProject)' == 'true' or '$(IsTestAssetProject)' == 'true' or '$(IsSampleProject)' == 'true'">true</ExcludeFromSourceBuild>
+    <ExcludeFromSourceBuild Condition="'$(IsAnalyzersProject)' == 'true' or '$(IsSpecificationTestProject)' == 'true' or '$(IsUnitTestProject)' == 'true' or '$(IsBenchmarkProject)' == 'true' or '$(IsTestAssetProject)' == 'true' or '$(IsSampleProject)' == 'true'">true</ExcludeFromSourceBuild>
   </PropertyGroup>
 
   <Import Project="eng\FlakyTests.BeforeArcade.props" />

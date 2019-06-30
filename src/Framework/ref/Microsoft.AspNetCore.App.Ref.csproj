@@ -3,6 +3,7 @@
 
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
+    <ExcludeFromSourceBuild>true</ExcludeFromSourceBuild>
     <IsShippingPackage>true</IsShippingPackage>
     <IsPackable>true</IsPackable>
     <IsPackable Condition="'$(IsTargetingPackBuilding)' == 'false'">false</IsPackable>
