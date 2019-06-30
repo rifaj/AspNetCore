@@ -2,8 +2,6 @@
   <PropertyGroup>
     <ToolSharedSourceRoot>$(MSBuildThisFileDirectory)Shared\</ToolSharedSourceRoot>
     <DisablePubternalApiCheck>true</DisablePubternalApiCheck>
-    <!-- Tools are not required for source build -->
-    <ExcludeFromSourceBuild>true</ExcludeFromSourceBuild>
   </PropertyGroup>
 
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory)..\, Directory.Build.props))\Directory.Build.props" />
