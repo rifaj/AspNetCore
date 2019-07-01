@@ -31,4 +31,4 @@ trap "{
 }" EXIT
 
 export DotNetBuildFromSource='true'
-"$reporoot/eng/common/build.sh" --restore --build --pack "$@"
+"$reporoot/eng/common/build.sh" --restore --build "$@"
