@@ -250,16 +250,17 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 await Assert.ThrowsAnyAsync<OperationCanceledException>(() => responseTask);
                 await disconnectCts.Task.WithTimeout();
 
-                Assert.Throws<IOException>(() =>
+                await Assert.ThrowsAsync<IOException>(async () =>
                 {
                     // It can take several tries before Write notices the disconnect.
                     for (int i = 0; i < Utilities.WriteRetryLimit; i++)
                     {
-                        context.Response.Body.Write(new byte[1000], 0, 1000);
+                        context.Response.Body.Write(Utilities.WriteBuffer, 0, Utilities.WriteBuffer.Length);
+                        await Task.Delay(TimeSpan.FromMilliseconds(50));
                     }
                 });
 
-                Assert.Throws<ObjectDisposedException>(() => context.Response.Body.Write(new byte[1000], 0, 1000));
+                Assert.Throws<ObjectDisposedException>(() => context.Response.Body.Write(Utilities.WriteBuffer, 0, Utilities.WriteBuffer.Length));
 
                 context.Dispose();
             }
@@ -291,11 +292,12 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                     // It can take several tries before Write notices the disconnect.
                     for (int i = 0; i < Utilities.WriteRetryLimit; i++)
                     {
-                        await context.Response.Body.WriteAsync(new byte[1000], 0, 1000);
+                        await context.Response.Body.WriteAsync(Utilities.WriteBuffer, 0, Utilities.WriteBuffer.Length);
+                        await Task.Delay(TimeSpan.FromMilliseconds(50));
                     }
                 });
 
-                await Assert.ThrowsAsync<ObjectDisposedException>(() => context.Response.Body.WriteAsync(new byte[1000], 0, 1000));
+                await Assert.ThrowsAsync<ObjectDisposedException>(() => context.Response.Body.WriteAsync(Utilities.WriteBuffer, 0, Utilities.WriteBuffer.Length));
 
                 context.Dispose();
             }
@@ -324,7 +326,7 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 // It can take several tries before Write notices the disconnect.
                 for (int i = 0; i < Utilities.WriteRetryLimit; i++)
                 {
-                    context.Response.Body.Write(new byte[1000], 0, 1000);
+                    context.Response.Body.Write(Utilities.WriteBuffer, 0, Utilities.WriteBuffer.Length);
                 }
                 context.Dispose();
             }
@@ -352,7 +354,7 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 // It can take several tries before Write notices the disconnect.
                 for (int i = 0; i < Utilities.WriteRetryLimit; i++)
                 {
-                    await context.Response.Body.WriteAsync(new byte[1000], 0, 1000);
+                    await context.Response.Body.WriteAsync(Utilities.WriteBuffer, 0, Utilities.WriteBuffer.Length);
                 }
                 context.Dispose();
             }
@@ -386,12 +388,13 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                     await disconnectCts.Task.WithTimeout();
                 }
 
-                Assert.Throws<IOException>(() =>
+                await Assert.ThrowsAsync<IOException>(async () =>
                 {
                     // It can take several tries before Write notices the disconnect.
                     for (int i = 0; i < Utilities.WriteRetryLimit; i++)
                     {
-                        context.Response.Body.Write(new byte[1000], 0, 1000);
+                        context.Response.Body.Write(Utilities.WriteBuffer, 0, Utilities.WriteBuffer.Length);
+                        await Task.Delay(TimeSpan.FromMilliseconds(50));
                     }
                 });
                 context.Dispose();
@@ -430,7 +433,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                     // It can take several tries before Write notices the disconnect.
                     for (int i = 0; i < Utilities.WriteRetryLimit; i++)
                     {
-                        await context.Response.Body.WriteAsync(new byte[1000], 0, 1000);
+                        await context.Response.Body.WriteAsync(Utilities.WriteBuffer, 0, Utilities.WriteBuffer.Length);
+                        await Task.Delay(TimeSpan.FromMilliseconds(50));
                     }
                 });
                 context.Dispose();
@@ -467,7 +471,7 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 // It can take several tries before Write notices the disconnect.
                 for (int i = 0; i < Utilities.WriteRetryLimit; i++)
                 {
-                    context.Response.Body.Write(new byte[1000], 0, 1000);
+                    context.Response.Body.Write(Utilities.WriteBuffer, 0, Utilities.WriteBuffer.Length);
                 }
                 context.Dispose();
             }
@@ -502,7 +506,7 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 // It can take several tries before Write notices the disconnect.
                 for (int i = 0; i < Utilities.WriteRetryLimit; i++)
                 {
-                    await context.Response.Body.WriteAsync(new byte[1000], 0, 1000);
+                    await context.Response.Body.WriteAsync(Utilities.WriteBuffer, 0, Utilities.WriteBuffer.Length);
                 }
                 context.Dispose();
             }
