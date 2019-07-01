@@ -21,7 +21,8 @@
   </ItemGroup>
 
   <!-- Workaround https://github.com/aspnet/AspNetCore/issues/7503. This chains GenerateSourceLinkFile before razor component targets run. -->
-  <Target Name="_EnsureSourceLinkHappensBeforeRazorComponentGeneration"
+  <Target Condition="'$(DotNetBuildFromSource)' != 'true'"
+          Name="_EnsureSourceLinkHappensBeforeRazorComponentGeneration"
           BeforeTargets="PrepareForRazorComponentGenerate"
           DependsOnTargets="GenerateSourceLinkFile" />
 
