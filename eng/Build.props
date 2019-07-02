@@ -122,7 +122,10 @@
           the entire pattern will silently fail to evaluate correctly.
         -->
 
-        <ToolProjects Include="$(RepoRoot)src\Tools\**\*.*proj;"/>
+        <!-- Tool projects except FirstRunCertGenerator are not neede in source build -->
+        <ProjectToExclude Condition="'$(DotNetBuildFromSource)' == 'true'"
+                          Include="$(RepoRoot)src\Tools\**\*.*proj"
+                          Exclude="$(RepoRoot)src\Tools\FirstRunCertGenerator\Microsoft.AspNetCore.DeveloperCertificates.XPlat.csproj"/>
 
         <!-- Temporary, need to figure out how to resolve custom references in source build -->
         <MetaProjects Include="
@@ -130,7 +133,7 @@
                           $(RepoRoot)src\Framework\src\Microsoft.AspNetCore.App.Runtime.csproj;
                           $(RepoRoot)src\Framework\test\Microsoft.AspNetCore.App.UnitTests.csproj;" />
 
-        <DotNetProjects Condition="'$(DotNetBuildFromSource)' != 'true'" Include="@(ToolProjects);@(MetaProjects)" />
+        <DotNetProjects Condition="'$(DotNetBuildFromSource)' != 'true'" Include="@(MetaProjects)" />
 
         <DotNetProjects Include="
                           $(RepoRoot)src\DefaultBuilder\**\*.*proj;
@@ -145,6 +148,7 @@
                           $(RepoRoot)src\Security\**\*.*proj;
                           $(RepoRoot)src\SiteExtensions\Microsoft.Web.Xdt.Extensions\**\*.csproj;
                           $(RepoRoot)src\Shared\**\*.*proj;
+                          $(RepoRoot)src\Tools\**\*.*proj;
                           $(RepoRoot)src\Middleware\**\*.csproj;
                           $(RepoRoot)src\Razor\**\*.*proj;
                           $(RepoRoot)src\Mvc\**\*.*proj;
