@@ -129,7 +129,8 @@
     </ItemGroup>
   </Target>
 
-  <Target Name="VerifyBuildOutputs" AfterTargets="BuildRazorViews">
+  <!-- Source build doesn't build this package -->
+  <Target Name="VerifyBuildOutputs" AfterTargets="BuildRazorViews" Condition="'$(DotNetBuildFromSource)' != 'true'">
     <ItemGroup>
       <ExpectedOutputFile Include="$(TargetDir)Microsoft.AspNetCore.Identity.UI.Views.V3.dll" />
       <ExpectedOutputFile Include="$(TargetDir)Microsoft.AspNetCore.Identity.UI.Views.V4.dll" />
